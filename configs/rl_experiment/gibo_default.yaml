@@ -1,0 +1,75 @@
+method: gibo
+
+out_dir: './experiments/rl_experiments/test_experiment/gibo/'  # Directory for experiment results.
+
+environment_name: Swimmer-v1
+mlp:
+    layers: [8,2]
+    discretize: 
+    add_bias: False
+    state_normalization: False
+    manipulate_reward: 
+        shift: 
+        scale: 350
+
+trials: 3
+# Either choose max_iterations or max_objective_calls unequal None.
+max_iterations:
+max_objective_calls: 100
+
+optimizer_config: 
+    max_samples_per_iteration: 16
+    OptimizerTorch: sgd
+    optimizer_torch_config: 
+        lr: 0.5
+    lr_schedular:
+    Model: derivative_gp
+    model_config:
+        prior_mean: 0.
+        ard_num_dims: dim_search_space  # If not None, each input dimension gets its own separate lengthscale.
+        N_max: 32
+        lengthscale_constraint: 
+            constraint:
+            kwargs:
+        lengthscale_hyperprior: 
+            prior: uniform
+            kwargs: 
+                a: 0.01
+                b: 0.3
+        outputscale_constraint:
+            constraint: greather_than
+            kwargs: 
+                lower_bound: 0.001
+        outputscale_hyperprior:
+            prior: normal
+            kwargs: 
+                loc: 2.
+                scale: 1.
+        noise_constraint: 
+            constraint:
+            kwargs:
+        noise_hyperprior:
+            prior:
+            kwargs:
+    hyperparameter_config: 
+        optimize_hyperparameters: True
+        hypers:
+            covar_module.base_kernel.lengthscale:
+            covar_module.outputscale:
+            likelihood.noise: .01
+        no_noise_optimization: True
+    optimize_acqf: bga
+    optimize_acqf_config: 
+        q: 1
+        num_restarts: 5
+        raw_samples: 64
+    # Either choose bounds or delta unequal None.
+    bounds: 
+        lower_bound:
+        upper_bound:
+    delta: 0.1
+    epsilon_diff_acq_value: 0.01
+    generate_initial_data:
+    standard_deviation_scaling: False
+    normalize_gradient: True
+    verbose: True

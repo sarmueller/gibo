@@ -1,0 +1,15 @@
+method: rs  # (Augmented) random search.
+
+out_dir: './experiments/synthetic_experiments/test_experiment/rs/'
+
+# Either choose max_iterations or max_objective_calls not None.
+max_iterations: 
+max_objective_calls: 300
+
+optimizer_config:
+    step_size: 0.02
+    samples_per_iteration: variable  # 1+dim//8
+    exploration_noise: variable  # 0.1*factor_lengthscale*get_lengthscales(dim, factor_hennig)
+    standard_deviation_scaling: True
+    num_top_directions:
+    param_args_ignore: 

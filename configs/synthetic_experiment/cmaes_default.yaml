@@ -1,0 +1,4 @@
+method: cmaes  # Covariance matrix adaptation.
+
+out_dir: './experiments/synthetic_experiments/test_experiment/cmaes/'
+

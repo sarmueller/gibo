@@ -1,0 +1,32 @@
+
+max_samples_per_iteration: 9
+max_iterations: None
+max_objective_calls: 130
+OptimizerTorch: torch.optim.SGD
+optimizer_torch_config: {'lr': 1.}
+lr_schedular: {0: 0.15, 3: 0.1, 8: 0.05}
+Model: DerivativeExactGPSEModel
+model_config: 
+prior_mean: torch.tensor(0., dtype=torch.float32)
+ard_num_dims: 9
+N_max: 40
+lengthscale_constraint: 
+lengthscale_hyperprior: gpytorch.priors.UniformPrior(.01, 0.3)
+outputscale_constraint: 
+outputscale_hyperprior: gpytorch.priors.NormalPrior(20., 5)
+noise_constraint: 
+noise_hyperprior: 
+hyperparameter_config:
+optimize_hyperparameters: True
+hypers:
+    lengthscale: 
+    outputscale: 
+    noise:  torch.tensor(2.)
+no_noise_optimization: True
+optimize_acqf_config: 
+optimize_acqf_config': {'q': 1, 'num_restarts': 5, 'raw_samples': 64},
+bounds: 
+delta: 0.1
+epsilon_diff_acq_value: 0.01
+standard_deviation_scaling: False
+normalize_gradient: True

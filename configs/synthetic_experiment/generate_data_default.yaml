@@ -1,0 +1,10 @@
+out_dir : './experiments/synthetic_experiments/test_experiment/'
+dimensions : [4, 8, 12, 16, 20, 24, 28, 32, 36]
+num_objectives : 40
+num_samples : 1000
+noise_variance : 0.01
+factor_lengthscale : 2
+gamma : 0.3
+gp_hypers: 
+    outputscale: 1.
+n_max: 15

@@ -1,0 +1,63 @@
+method: vbo  # Vanilla bayesian optimization.
+
+out_dir: './experiments/rl_experiments/test_experiment/vbo/'
+
+environment_name: Swimmer-v1
+mlp:
+    layers: (8,2)
+    add_bias: False
+    state_normalization: True
+    manipulate_reward: 
+        shift: 
+        scale: 350
+
+trials: 3
+# Either choose max_iterations or max_objective_calls unequal None.
+max_iterations:
+max_objective_calls: 2000
+
+optimizer_config: 
+    Model: plain_gp
+    model_config:
+        prior_mean: 0.
+        ard_num_dims: dim_search_space  # If not None, each input dimension gets its own separate lengthscale.  
+        lengthscale_constraint: 
+            constraint:
+            kwargs:
+        lengthscale_hyperprior: 
+            prior: uniform
+            kwargs: 
+                a: 0.01
+                b: 0.3
+        outputscale_constraint:
+            constraint: greather_than
+            kwargs: 
+                lower_bound: 0.001
+        outputscale_hyperprior:
+            prior: normal
+            kwargs:
+                loc: 2.
+                scale: 1.
+        noise_constraint: 
+            constraint:
+            kwargs:
+        noise_hyperprior:
+            prior:
+            kwargs:
+    hyperparameter_config: 
+        optimize_hyperparameters:
+        hypers:
+            covar_module.base_kernel.lengthscale:
+            covar_module.outputscale:
+            likelihood.noise:
+        no_noise_optimization:
+    acquisition_function: expected_improvement
+    acqf_config: 
+        best_f: 
+    optimize_acqf: vbo
+    optimize_acqf_config: 
+        bounds: 
+            lower_bound: 0
+            upper_bound: 1
+    generate_initial_data:
+    verbose: True
