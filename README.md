@@ -14,7 +14,7 @@ Black-box optimization refers to the general setup of optimizing an unknown func
 
 
 # Installation
-Our GIBO implementation relies on mujoco-py 0.5.7 with MuJoCo Pro version 1.31.
+Our implementation relies on mujoco-py 0.5.7 with MuJoCo Pro version 1.31.
 To install MuJoCo follow the instructions here: [https://github.com/openai/mujoco-py](https://github.com/openai/mujoco-py).
 To run Linear Quadratic Regulator experiments, follow the instruction under [gym-lqr](./gym-lqr/).
 
