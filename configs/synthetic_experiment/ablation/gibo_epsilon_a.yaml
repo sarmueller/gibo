@@ -1,0 +1,63 @@
+method: gibo  # Bayesian gradient ascent.
+
+out_dir: './experiments/synthetic_experiments/ablation/gibo_epsilon_a/'
+
+# Either choose max_iterations or max_objective_calls not None.
+max_iterations:
+max_objective_calls: 300
+
+# Manually set hyperparameters.
+set_hypers: True  
+only_set_noise_hyper: False 
+
+optimizer_config: 
+    max_samples_per_iteration: dim_search_space
+    OptimizerTorch: sgd
+    optimizer_torch_config: 
+        lr: 0.25
+    lr_schedular:
+    Model: derivative_gp
+    model_config:
+        prior_mean: 0.
+        ard_num_dims: dim_search_space  # If not None, each input dimension gets its own separate lengthscale.
+        N_max: variable  # 5*dim_search_space
+        lengthscale_constraint: 
+            constraint:
+            kwargs:
+        lengthscale_hyperprior: 
+            prior: 
+            kwargs: 
+        outputscale_constraint:
+            constraint: 
+            kwargs: 
+        outputscale_hyperprior:
+            prior: 
+            kwargs: 
+        noise_constraint: 
+            constraint:
+            kwargs:
+        noise_hyperprior:
+            prior:
+            kwargs:
+    hyperparameter_config: 
+        optimize_hyperparameters: False
+        hypers:
+            covar_module.base_kernel.lengthscale:
+            covar_module.outputscale:
+            likelihood.noise:
+        no_noise_optimization: False
+    optimize_acqf: bga
+    optimize_acqf_config: 
+        q: 1
+        num_restarts: 5
+        raw_samples: 64
+    # Either choose bounds or delta unequal None.
+    bounds: 
+        lower_bound:
+        upper_bound:
+    delta: 0.2
+    epsilon_diff_acq_value: 
+    generate_initial_data:
+    standard_deviation_scaling: False
+    normalize_gradient: True
+    verbose: False

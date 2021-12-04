@@ -1,0 +1,24 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+
+[packages]
+numpy = "1.19.2"
+matplotlib = "3.3.2"
+pip = "20.2.2"
+cython = "0.29.21"
+pyyaml = "5.3.1"
+mypy = "0.812"
+torch = "1.6.0"
+torchvision = "0.7.0"
+botorch = "0.3.1"
+gpytorch = "1.2.0"
+gym = "0.9.3"
+# mujoco-py = "0.5.7" # Uncomment if mujoco is installed on your system
+glfw = "1.12.0"
+
+[requires]
+python_version = "3.8.5" 

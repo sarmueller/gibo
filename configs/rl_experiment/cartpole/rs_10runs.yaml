@@ -1,0 +1,27 @@
+method: rs  # (Augmented) random search.
+
+out_dir: './experiments/rl_experiments/cartpole/rs_10runs/'
+
+environment_name: CartPole-v1
+mlp:
+    layers: [4,1]
+    discretize: 2
+    add_bias: False
+    state_normalization: False
+    manipulate_reward: 
+        shift: 
+        scale: 
+
+trials: 10
+# Either choose max_iterations or max_objective_calls unequal None.
+max_iterations: 
+max_objective_calls: 100
+
+optimizer_config:
+    step_size: 0.025
+    samples_per_iteration: 8
+    exploration_noise: 0.02
+    standard_deviation_scaling: True
+    num_top_directions: 4
+    param_args_ignore: 
+    verbose: True

@@ -1,0 +1,52 @@
+method: vbo  # Vanilla bayesian optimization.
+
+out_dir: './experiments/synthetic_experiments/test_experiment/vbo/'
+
+# Either choose max_iterations or max_objective_calls not None.
+max_iterations:
+max_objective_calls: 10 #300
+
+# Manually set hyperparameters.
+set_hypers: True  
+only_set_noise_hyper: False 
+
+optimizer_config: 
+    Model: plain_gp
+    model_config:
+        prior_mean: 0.
+        ard_num_dims: dim_search_space  # If 'dim_search_space', each input dimension gets its own separate lengthscale.  
+        lengthscale_constraint: 
+            constraint:
+            kwargs:
+        lengthscale_hyperprior: 
+            prior: 
+            kwargs: 
+        outputscale_constraint:
+            constraint: 
+            kwargs: 
+        outputscale_hyperprior:
+            prior: 
+            kwargs:
+        noise_constraint: 
+            constraint:
+            kwargs:
+        noise_hyperprior:
+            prior:
+            kwargs:
+    hyperparameter_config: 
+        optimize_hyperparameters: False
+        hypers:
+            covar_module.base_kernel.lengthscale:
+            covar_module.outputscale:
+            likelihood.noise:
+        no_noise_optimization: False
+    acquisition_function: expected_improvement
+    acqf_config: 
+        best_f: 
+    optimize_acqf: vbo
+    optimize_acqf_config: 
+        bounds: 
+            lower_bound: 0.
+            upper_bound: 1.
+    generate_initial_data:
+    verbose: False

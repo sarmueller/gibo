@@ -1,0 +1,26 @@
+method: rs  # (Augmented) random search.
+
+out_dir: './experiments/rl_experiments/hopper/rs/'
+
+environment_name: Hopper-v1
+mlp:
+    layers: [11,3]
+    add_bias: True
+    state_normalization: True
+    manipulate_reward: 
+        shift: 1
+        scale: 
+
+trials: 3
+# Either choose max_iterations or max_objective_calls unequal None.
+max_iterations: 
+max_objective_calls: 8000
+
+optimizer_config:
+    step_size: 0.01
+    samples_per_iteration: 8
+    exploration_noise: 0.025
+    standard_deviation_scaling: True
+    num_top_directions: 4
+    param_args_ignore: [-1, -2, -3]
+    verbose: True

@@ -1,0 +1,10 @@
+method: cmaes  # Covariance matrix adaptation.
+
+out_dir: './experiments/synthetic_experiments/110620/cmaes/'
+
+# Either choose max_iterations or max_objective_calls not None.
+max_iterations: 
+max_objective_calls: 300
+
+optimizer_config:
+    sigma: variable  # 0.3*get_lengthscales(dim, factor_hennig) 
